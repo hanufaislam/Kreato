@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add asset · Kreato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="setup.css?v=11">
+  <link rel="stylesheet" href="product.css?v=11">
+  <link rel="stylesheet" href="flow.css?v=11">
+  <script src="proto-reset.js?v=11"></script>
+</head>
+<body class="setup flow">
+
+<header class="flow-top">
+  <a class="brand" href="dashboard.html?state=new" aria-label="Kreato dashboard"><span class="logo-mark">K</span>kreato</a>
+  <ol class="stepper" id="stepper" aria-label="Add asset progress"></ol>
+  <div class="top-r">
+    <span class="save-ind" id="save-ind" role="status" aria-live="polite"></span>
+    <a class="icon-btn close-btn" id="exit" href="dashboard.html?state=new" aria-label="Save and close"><i data-lucide="x"></i></a>
+  </div>
+</header>
+
+<main class="setup-wrap">
+  <p class="flow-name">Add asset</p>
+  <div id="stage"></div>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script src="setup-common.js?v=11"></script>
+<script src="setup-shared.js?v=11"></script>
+<script src="product-new.js?v=11"></script>
+</body>
+</html>

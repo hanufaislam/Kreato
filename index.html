@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kreato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="variant.css?v=11">
+  <script src="proto-reset.js?v=11"></script>
+</head>
+<body>
+
+<!-- ============ 1. SIGN IN ============ -->
+<main class="screen signin" id="screen-signin">
+  <div class="wordmark">kreato</div>
+
+  <div class="signin-grid">
+    <section class="signin-left">
+      <h2>Sell digital products. Keep more of every sale.</h2>
+      <p class="lead">Presets, templates, Notion dashboards and prompt packs. List once, sell forever.</p>
+
+      <div class="aside-stats">
+        <div><b>3,400+</b><span>Active creators</span></div>
+        <div><b>₹5.5L+</b><span>Paid to creators</span></div>
+        <div><b>5%</b><span>Platform fee</span></div>
+      </div>
+
+      <p class="mono-label">Live activity</p>
+      <ul class="activity">
+        <li><span class="av">C</span><div><b>@claudz joined Kreato</b><span>New creator</span></div><em>1h ago</em></li>
+        <li><span class="av">D</span><div><b>Youtube Live classes</b><span>@digi-ai · PDF</span></div><em class="price">₹349</em></li>
+        <li><span class="av"><i data-lucide="arrow-down" aria-hidden="true"></i></span><div><b>Prompt Vault for College AI Tools</b><span>Free download · PDF</span></div><em>1h ago</em></li>
+      </ul>
+    </section>
+
+    <section class="signin-right">
+      <div class="signin-card">
+        <h1 style="margin-bottom:28px">Sign in to Kreato</h1>
+
+        <button class="btn btn-google btn-block" id="google-btn" type="button">
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.4 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="label-text">Continue with Google</span>
+        </button>
+        <p class="note">No credit card required</p>
+      </div>
+      <p class="alt">Don't have an account? <a href="#" id="start-selling">Start selling</a></p>
+      <p class="legal">By continuing you agree to our <a href="#">terms of service</a> and <a href="#">privacy policy</a>.</p>
+    </section>
+  </div>
+</main>
+
+<!-- ============ ONBOARDING ============ -->
+<main class="screen ob" id="screen-ob" hidden>
+  <header class="ob-bar"><div class="bar-logo"><span class="logo-mark">K</span>kreato</div></header>
+  <label class="variant-switch">
+    <i data-lucide="layout-template" aria-hidden="true"></i>
+    <span class="sr-only">Onboarding layout</span>
+    <select id="variant" aria-label="Onboarding layout">
+      <option value="card">Current layout</option>
+      <option value="open">New layout</option>
+    </select>
+  </label>
+  <!-- decorative background (not part of layout) -->
+  <div class="deco" aria-hidden="true"><i class="grid-bg"></i><i class="dots d1"></i><i class="dots d2"></i></div>
+
+
+  <div class="ob-center">
+    <div class="ob-logo"><span class="logo-mark">K</span>kreato</div>
+    <p class="ob-tag" id="ob-tag">Finish the rest from your dashboard</p>
+
+    <div class="card ob-card">
+      <p class="ob-step-title">Create your store</p>
+
+      <!-- ---- Store name + link (only onboarding step) ---- -->
+      <form class="ob-body" id="step-1" novalidate>
+        <h2>Name your store</h2>
+        <p class="lead">You can change this later.</p>
+
+        <div class="field">
+          <label class="label" for="name">Name or brand</label>
+          <input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="e.g. Hanufa Islam" maxlength="40" required>
+        </div>
+
+        <div class="field">
+          <label class="label" for="handle">Store link</label>
+          <div class="input-group" id="handle-group">
+            <span class="addon">kreato.co.in/</span>
+            <input class="input" id="handle" name="handle" type="text" placeholder="yourname" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="30" aria-describedby="handle-msg handle-help" required>
+            <span class="status" id="handle-status"></span>
+          </div>
+          <div class="msg" id="handle-msg" role="status" aria-live="polite"></div>
+          <p class="helper" id="handle-help">3–30 letters, numbers, <code>-</code> or <code>_</code></p>
+          <div class="url-preview" id="url-preview" hidden>
+            <span>Buyers will visit</span> <b id="url-text"></b>
+          </div>
+          <div class="suggest" id="suggest" hidden aria-label="Available suggestions"><span id="suggest-list"></span></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="s1-next" type="submit" disabled>
+            <span class="spinner" aria-hidden="true"></span><span class="label-text">Continue</span><i data-lucide="arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- ============ HANDOFF (placeholder until dashboard UI is shared) ============ -->
+<main class="screen" id="screen-home" hidden>
+  <div class="home">
+    <div class="home-head">
+      <div class="wordmark" style="color:var(--primary)">kreato</div>
+      <span class="badge" id="home-url"></span>
+    </div>
+    <div class="card setup">
+      <h2 id="home-title">Welcome to Kreato</h2>
+      <p class="helper" id="home-sub" style="margin-top:2px">Finish setting up to start selling.</p>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="prog-bar"><i id="prog-fill"></i></div>
+      <p class="helper" id="prog-text" style="margin-top:0"></p>
+      <ul class="tasks" id="tasks"></ul>
+    </div>
+    <div class="card setup optional">
+      <div class="task" style="border:0;padding:0">
+        <div class="grow"><div class="tt">Offer 1-on-1 sessions <span class="badge">Optional</span></div><div class="td">Let buyers book time with you. Set this up whenever you're ready.</div></div>
+        <button class="btn btn-outline" type="button">Set up</button>
+      </div>
+    </div>
+    <p class="inline-note" style="margin-top:24px"><button class="btn-link" id="restart" type="button"><i data-lucide="rotate-ccw" aria-hidden="true"></i> Restart prototype</button></p>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script src="app.js?v=11"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+/* Focused flow layout: storefront profile, add asset, 1:1 session.
+   One task per screen: logo · progress · close in the header, a single page title,
+   the form on the left and a summary or preview card on the right. Uses Kreato tokens from styles.css. */
+body.flow { background: #fff; }
+
+/* ---------- header ---------- */
+.flow-top { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: 180px minmax(0, 1fr) 180px; align-items: center; gap: 24px; height: 72px; padding: 0 32px; background: #fff; border-bottom: 1px solid var(--border); }
+.flow-top .top-r { justify-content: flex-end; }
+.flow-top .close-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--muted); color: var(--foreground); }
+.flow-top .close-btn:hover { background: #e9eaee; }
+.flow-top .save-ind .t { white-space: nowrap; }
+
+/* compact progress: thin line, small dot, label under it */
+.flow-top .stepper { margin: 0 auto; width: 100%; max-width: 560px; }
+.flow-top .stepper li + li::before { top: 4px; height: 2px; }
+.flow-top .stepper button { gap: 8px; font-size: 13px; padding: 0 2px; }
+.flow-top .stepper .num { width: 10px; height: 10px; border: 0; background: var(--input); font-size: 0; box-shadow: none; }
+.flow-top .stepper .num .lucide { display: none; }
+.flow-top .stepper .done .num { background: var(--primary); }
+.flow-top .stepper .reach .num { background: #fff; box-shadow: inset 0 0 0 2px var(--primary); }
+.flow-top .stepper .current .num { background: var(--primary); box-shadow: 0 0 0 4px var(--ring); }
+.flow-top .stepper .current button { color: var(--foreground); font-weight: 600; }
+.flow-top .stepper .done button, .flow-top .stepper .reach button { color: var(--foreground); }
+
+/* ---------- page ---------- */
+.flow-name { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); margin-bottom: 8px; }
+.flow .setup-wrap { max-width: 1080px; padding: 48px 32px 96px; }
+.flow .setup-grid { grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; }
+.flow .panel { padding: 0; border: 0; box-shadow: none; background: transparent; border-radius: 0; }
+.flow .panel h2 { font-size: 30px; line-height: 38px; font-weight: 700; letter-spacing: -.02em; }
+.flow .panel .lead { margin-top: 6px; }
+.flow .panel > .field:first-of-type, .flow .panel h2 + .field, .flow .panel h2 + .sec-label { margin-top: 32px; }
+.flow .field { margin-top: 24px; }
+.flow .field.sm { margin-top: 14px; }
+.flow .actions-bar { border-top: 0; padding-top: 0; margin-top: 40px; }
+.flow .actions-bar .btn { height: 48px; padding: 0 22px; }
+.flow .public-note { margin-top: 28px; }
+
+/* side card (preview or summary) */
+.flow .preview-col, .side-card { border: 1px solid var(--border); border-radius: 16px; padding: 20px; background: #fff; }
+.flow .preview-col .stage-bg { background: var(--background); }
+.side-stack { position: sticky; top: 104px; display: grid; gap: 16px; align-content: start; }
+.side-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+
+/* group label with a divider under it */
+.sec-label { margin-top: 36px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--muted-foreground); }
+
+/* choice rows: icon, title, one line, radio on the right */
+.opt-rows { display: grid; }
+.opt-row { display: flex; align-items: center; gap: 14px; padding: 16px 4px; border-bottom: 1px solid var(--muted); cursor: pointer; }
+.opt-row:last-child { border-bottom: 0; }
+.opt-row .ic { width: 44px; height: 44px; border-radius: 50%; background: var(--muted); color: var(--foreground); display: grid; place-items: center; flex: none; }
+.opt-row .txt { flex: 1; min-width: 0; }
+.opt-row b { display: block; font-weight: 600; font-size: 15px; }
+.opt-row small { color: var(--muted-foreground); font-size: 13.5px; }
+.opt-row input[type=radio] { width: 20px; height: 20px; accent-color: var(--primary); flex: none; margin: 0; }
+.opt-row:has(input:checked) .ic { background: var(--primary-soft); color: var(--primary); }
+.opt-row:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 10px; }
+
+/* switch rows that reveal more fields */
+.sw-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 4px; border-bottom: 1px solid var(--muted); }
+.sw-row b { display: block; font-weight: 600; font-size: 15px; }
+.sw-row small { color: var(--muted-foreground); font-size: 13.5px; }
+.sw-body { padding: 4px 4px 18px; border-bottom: 1px solid var(--muted); }
+.sw-body .field:first-child { margin-top: 4px; }
+
+/* key-value rows (summary + review) */
+.kv-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 6px 0; font-size: 14px; color: var(--muted-foreground); }
+.kv-row > :last-child { color: var(--foreground); font-weight: 500; text-align: right; overflow-wrap: anywhere; }
+.kv-row.big > :last-child { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.kv-row.earn > :last-child { color: #15803d; }
+.kv-row s { color: #9ca3af; font-weight: 400; }
+.sum-sep { border-top: 1px solid var(--border); margin: 10px 0; }
+
+/* review card */
+.review { margin-top: 32px; border: 1px solid var(--border); border-radius: 16px; }
+.review-sec { padding: 20px 24px; }
+.review-sec + .review-sec { border-top: 1px solid var(--border); }
+.review-sec header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.review-sec h3 { font-size: 15px; font-weight: 600; }
+.link-btn { border: 0; background: none; padding: 0; font: 500 14px var(--font); color: var(--primary); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.link-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+.review .thumbs { display: flex; gap: 6px; }
+.review .thumbs img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); }
+
+/* needed-to-publish list: each item jumps to its field */
+.needs { border: 1px solid #fde68a; background: #fffbeb; border-radius: 12px; padding: 14px 16px; }
+.needs b { display: block; font-size: 14px; color: #92400e; margin-bottom: 6px; }
+.needs ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.needs .link-btn { color: #92400e; font-size: 13.5px; text-align: left; }
+.pub-actions { display: grid; gap: 10px; }
+.pub-actions .btn { height: 48px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .flow .setup-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .side-stack { position: static; }
+}
+@media (max-width: 760px) {
+  .flow-top { grid-template-columns: 1fr auto; height: auto; padding: 12px 16px; row-gap: 12px; }
+  .flow-top .stepper { grid-column: 1 / -1; grid-row: 2; margin: 0 0 4px; }
+  .flow-top .stepper .s-label { display: none; }
+  .flow-top .stepper .current .s-label { display: block; position: static; }
+  .flow-top .save-ind { display: none; }
+  .flow .setup-wrap { padding: 28px 16px 64px; }
+  .flow .panel h2 { font-size: 24px; line-height: 32px; }
+  .review-sec { padding: 16px; }
+  .flow .actions-bar > span:empty { display: none; }
+}
