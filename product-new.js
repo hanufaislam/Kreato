@@ -229,7 +229,7 @@ function sideHTML() {
 }
 
 /* ---------- footer ---------- */
-const NEXT = { 1: 'Continue to pricing', 2: 'Continue to media', 3: 'Continue to review' };
+const NEXT = { 1: 'Next: Pricing', 2: 'Next: Media', 3: 'Next: Review' };
 function actions() {
   if (S.step === 4) return `<div class="actions-bar"><button class="btn btn-outline" type="button" id="back"><i data-lucide="arrow-left"></i>Back</button><span></span></div>`;
   return `<div class="actions-bar">${S.step > 1 ? '<button class="btn btn-outline" type="button" id="back"><i data-lucide="arrow-left"></i>Back</button>' : '<span></span>'}

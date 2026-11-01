@@ -65,9 +65,9 @@ function storefrontHTML(d, products, opts = {}) {
       ${profs ? `<div class="sf-profs">${profs}</div>` : ''}
       ${what || bio ? `<section class="sf-about"><h4>About</h4>${what ? `<p class="sf-what">${esc(what)}</p>` : ''}${bio ? `<p>${esc(bio)}</p>` : ''}</section>` : ''}
       ${socials ? `<section><div class="sf-socials">${socials}</div></section>` : ''}
-      <section><h4>Products</h4>${prods}</section>
+      ${opts.compact ? '' : `<section><h4>Products</h4>${prods}</section>`}
     </div>
-    <footer class="sf-foot">Powered by kreato</footer></div>`;
+    ${opts.compact ? '' : '<footer class="sf-foot">Powered by kreato</footer>'}</div>`;
 }
 
 /* ---- accessible modal dialog (Esc / backdrop close, focus trapped, focus restored) ---- */
