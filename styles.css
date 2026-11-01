@@ -117,44 +117,34 @@ a:hover { text-decoration: underline; }
 .toggle:hover { background: var(--muted); }
 .toggle[aria-pressed="true"] { background: var(--primary-soft); border-color: #c9c3f0; color: var(--primary); }
 
-/* ---------- Sign-in (full purple, white card) ---------- */
-.signin { background: var(--brand-panel); color: #fff; padding: 40px 56px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-.signin::before, .signin::after { content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.05); pointer-events: none; }
-.signin::before { width: 520px; height: 520px; left: -140px; top: 18%; }
-.signin::after { width: 460px; height: 460px; right: 22%; bottom: -220px; }
+/* ---------- Sign-in: purple panel with flowing lines | white sign-in column ---------- */
+.signin { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100vh; background: #fff; }
 .wordmark { font-size: 26px; font-weight: 600; letter-spacing: -.02em; position: relative; }
-.signin-grid { position: relative; flex: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 72px; align-items: center; max-width: 1280px; width: 100%; margin: 0 auto; padding: 24px 0 8px; }
-.signin-left { padding-left: 24px; }
-.signin-left h2 { font-size: 44px; line-height: 1.12; font-weight: 600; letter-spacing: -.025em; max-width: 14em; }
-.signin-left .lead { margin-top: 18px; font-size: 17px; color: rgba(255,255,255,.82); max-width: 30em; }
-.aside-stats { display: flex; gap: 40px; margin-top: 32px; }
-.aside-stats b { display: block; font-size: 22px; font-weight: 600; }
-.aside-stats span { font-size: 13px; color: rgba(255,255,255,.7); }
-.mono-label { margin-top: 44px; font: 500 12.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.activity { list-style: none; padding: 0; margin-top: 14px; display: grid; gap: 10px; max-width: 480px; }
-.activity li { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.09); }
-.activity .av { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.22); display: grid; place-items: center; font-size: 13px; font-weight: 600; flex: none; }
-.activity div { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.activity b { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.activity span:not(.av) { font-size: 12.5px; color: rgba(255,255,255,.65); }
-.activity em { font-style: normal; font-size: 12.5px; color: rgba(255,255,255,.65); }
-.activity em.price { color: #86efac; font-weight: 600; font-size: 14px; }
 
-.signin-right { display: flex; flex-direction: column; align-items: center; }
-.signin-card {
-  width: 100%; max-width: 460px; background: #fff; color: var(--foreground); text-align: center;
-  padding: 48px 36px 36px; border-radius: 20px; border-bottom: 6px solid #a79ae8;
-  box-shadow: 0 24px 60px rgba(20, 12, 70, .35);
-}
-.signin-card h1 { font-size: 28px; font-weight: 600; letter-spacing: -.02em; }
-.signin-card .sub { color: var(--muted-foreground); font-size: 16px; margin: 4px 0 28px; }
+.signin-left { position: relative; overflow: hidden; isolation: isolate; contain: paint; display: flex; flex-direction: column; padding: 40px; background: var(--brand-panel); color: #fff; }
+.signin-left > .wordmark, .signin-pitch { position: relative; z-index: 2; }
+.signin-paths { position: absolute; inset: 0; pointer-events: none; color: #fff; }
+.signin-paths canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; } /* drawn + animated in app.js */
+/* bottom fade so the heading reads over the lines */
+.signin-fade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, var(--brand-panel) 0%, rgba(85,73,182,.8) 18%, rgba(85,73,182,0) 45%); pointer-events: none; }
+.signin-pitch { margin-top: auto; }
+.signin-pitch h2 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.12; font-weight: 600; letter-spacing: -.025em; max-width: 13em; }
+.aside-stats { display: flex; flex-wrap: wrap; gap: 16px 40px; margin-top: 28px; }
+.aside-stats b { display: block; font-size: 22px; font-weight: 600; }
+.aside-stats span { font-size: 13px; color: rgba(255,255,255,.75); }
+
+.signin-right { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; }
+.signin-glow { position: absolute; top: -280px; right: -120px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(85,73,182,.10), rgba(85,73,182,0)); pointer-events: none; }
+.signin-box { position: relative; width: 100%; max-width: 384px; margin: 0 auto; }
+.signin-mlogo { display: none; color: var(--primary); margin-bottom: 40px; }
+.signin-box h1 { font-size: 28px; line-height: 1.2; font-weight: 600; letter-spacing: -.02em; margin-bottom: 28px; }
 .btn-google { height: 52px; border-radius: 999px; background: #fff; color: var(--foreground); border: 1.5px solid var(--input); font-size: 16px; font-weight: 500; }
 .btn-google:hover:not(:disabled) { background: var(--muted); border-color: #c4c8d2; }
-.signin-card .note { color: var(--muted-foreground); font-size: 13.5px; margin-top: 16px; }
-.legal { position: relative; margin-top: 14px; max-width: 360px; text-align: center; font-size: 12.5px; color: rgba(255,255,255,.65); line-height: 1.6; }
-.legal a { color: rgba(255,255,255,.9); text-decoration: underline; }
-.alt { margin-top: 28px; font-size: 15px; color: rgba(255,255,255,.85); }
-.alt a { color: #fff; font-weight: 600; text-decoration: underline; }
+.alt { margin-top: 20px; font-size: 15px; color: var(--muted-foreground); }
+.alt a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.legal { margin-top: 32px; font-size: 13px; color: var(--muted-foreground); line-height: 1.6; }
+.legal a { color: var(--muted-foreground); text-decoration: underline; text-underline-offset: 3px; }
+.legal a:hover, .alt a:hover { color: var(--primary-hover); }
 
 /* ---------- Onboarding shell ---------- */
 .ob { display: flex; flex-direction: column; align-items: center; padding: 20px 16px 56px; }
@@ -259,13 +249,11 @@ a:hover { text-decoration: underline; }
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  .signin { padding: 24px 20px 40px; }
-  .signin-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 28px; }
-  .signin-left { padding-left: 0; order: 2; }
-  .signin-right { order: 1; }
-  .signin-left h2 { font-size: 30px; }
-  .aside-stats { gap: 24px; }
+@media (max-width: 767px) {
+  .signin { grid-template-columns: 1fr; }
+  .signin-left { display: none; }
+  .signin-right { justify-content: flex-start; padding: 28px 16px 40px; }
+  .signin-mlogo { display: block; }
 }
 @media (max-width: 520px) {
   .ob-body { padding: 20px; }
@@ -356,7 +344,6 @@ a:hover { text-decoration: underline; }
 .msg .lucide { width: 15px; height: 15px; }
 .steps .num .lucide { width: 13px; height: 13px; stroke-width: 3; }
 .tick .lucide { width: 14px; height: 14px; stroke-width: 3; }
-.activity .av .lucide { width: 16px; height: 16px; }
 .btn-link .lucide { width: 14px; height: 14px; vertical-align: -2px; }
 
 /* Sticky offset is measured from the padding edge, so cancel the body padding to sit flush at the card bottom */

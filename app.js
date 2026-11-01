@@ -20,6 +20,62 @@ function toast(msg) {
 function setLoading(btn, on) { btn.classList.toggle('loading', on); btn.disabled = on; }
 
 /* ---- Sign in ---- */
+// Flowing background lines: two mirrored sets of 36 curves (same formula as the reference FloatingPaths).
+// Drawn on a canvas so the animation repaints only its own layer, never the sign-in content.
+function floatingPaths(position) {
+  const out = [];
+  for (let i = 0; i < 36; i++) {
+    const x = (n) => n - i * 5 * position, y = (n) => n - i * 6;
+    const d = `M${-x(380)} ${-(189 + i * 6)}C${-x(380)} ${-(189 + i * 6)} ${-x(312)} ${y(216)} ${x(152)} ${y(343)}C${x(616)} ${y(470)} ${x(684)} ${y(875)} ${x(684)} ${y(875)}`;
+    out.push({ d, width: 0.5 + i * 0.03, alpha: 0.1 + i * 0.03, dur: (20 + Math.random() * 10) * 1000 });
+  }
+  return out;
+}
+function startSigninPaths() {
+  const host = $('#signin-paths');
+  const paths = [...floatingPaths(1), ...floatingPaths(-1)];
+  // measure each curve once with a throwaway SVG path
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), probe = document.createElementNS(svg.namespaceURI, 'path');
+  svg.style.cssText = 'position:absolute;width:0;height:0;visibility:hidden'; svg.append(probe); document.body.append(svg);
+  paths.forEach((p) => { probe.setAttribute('d', p.d); p.len = probe.getTotalLength(); p.shape = new Path2D(p.d); });
+  svg.remove();
+
+  const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
+  host.append(canvas);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w = 0, h = 0, t0 = performance.now();
+  const lerp = (a, b, k) => a + (b - a) * k;
+  function draw(now) {
+    const dpr = window.devicePixelRatio || 1, cw = host.clientWidth, ch = host.clientHeight;
+    if (!cw || !ch) return; // panel hidden (phone width)
+    if (cw !== w || ch !== h) { w = cw; h = ch; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+    // viewBox 0 0 696 316, fitted to the width and anchored to the top
+    const s = Math.min(w / 696, h / 316), ox = (w - 696 * s) / 2;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    ctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * ox, 0);
+    ctx.strokeStyle = '#fff';
+    for (const p of paths) {
+      let dash = 1, off = 0, op = 0.45;
+      if (!still) {
+        // a dash grows along the line while it slides and pulses
+        const k = ((now - t0) % p.dur) / p.dur, a = k < 0.5 ? k * 2 : (k - 0.5) * 2;
+        dash = k < 0.5 ? lerp(0.3, 0.65, a) : lerp(0.65, 1, a);
+        off = k < 0.5 ? lerp(0, -1, a) : lerp(-1, 0, a);
+        op = k < 0.5 ? lerp(0.3, 0.6, a) : lerp(0.6, 0.3, a);
+      }
+      ctx.globalAlpha = p.alpha * op;
+      ctx.lineWidth = p.width;
+      ctx.setLineDash(still ? [] : [dash * p.len, p.len]);
+      ctx.lineDashOffset = off * p.len;
+      ctx.stroke(p.shape);
+    }
+  }
+  if (still) { draw(0); new ResizeObserver(() => draw(0)).observe(host); return; }
+  const loop = (now) => { if (!screens.signin.hidden && !document.hidden) draw(now); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+}
+startSigninPaths();
+
 async function signIn() {
   const b = $('#google-btn'); setLoading(b, true);
   await delay(900); setLoading(b, false);

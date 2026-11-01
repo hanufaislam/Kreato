@@ -7,50 +7,43 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=12">
-  <link rel="stylesheet" href="variant.css?v=12">
-  <script src="proto-reset.js?v=12"></script>
+  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="variant.css?v=15">
+  <script src="proto-reset.js?v=15"></script>
 </head>
 <body>
 
 <!-- ============ 1. SIGN IN ============ -->
 <main class="screen signin" id="screen-signin">
-  <div class="wordmark">kreato</div>
-
-  <div class="signin-grid">
-    <section class="signin-left">
+  <section class="signin-left">
+    <div class="signin-paths" id="signin-paths" aria-hidden="true"></div>
+    <div class="signin-fade" aria-hidden="true"></div>
+    <div class="wordmark">kreato</div>
+    <div class="signin-pitch">
       <h2>Sell digital products. Keep more of every sale.</h2>
-      <p class="lead">Presets, templates, Notion dashboards and prompt packs. List once, sell forever.</p>
-
       <div class="aside-stats">
         <div><b>3,400+</b><span>Active creators</span></div>
         <div><b>₹5.5L+</b><span>Paid to creators</span></div>
         <div><b>5%</b><span>Platform fee</span></div>
       </div>
+    </div>
+  </section>
 
-      <p class="mono-label">Live activity</p>
-      <ul class="activity">
-        <li><span class="av">C</span><div><b>@claudz joined Kreato</b><span>New creator</span></div><em>1h ago</em></li>
-        <li><span class="av">D</span><div><b>Youtube Live classes</b><span>@digi-ai · PDF</span></div><em class="price">₹349</em></li>
-        <li><span class="av"><i data-lucide="arrow-down" aria-hidden="true"></i></span><div><b>Prompt Vault for College AI Tools</b><span>Free download · PDF</span></div><em>1h ago</em></li>
-      </ul>
-    </section>
+  <section class="signin-right">
+    <div class="signin-glow" aria-hidden="true"></div>
+    <div class="signin-box">
+      <div class="wordmark signin-mlogo">kreato</div>
+      <h1>Sign in to Kreato</h1>
 
-    <section class="signin-right">
-      <div class="signin-card">
-        <h1 style="margin-bottom:28px">Sign in to Kreato</h1>
-
-        <button class="btn btn-google btn-block" id="google-btn" type="button">
+      <button class="btn btn-google btn-block" id="google-btn" type="button">
           <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.4 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
           <span class="spinner" aria-hidden="true"></span>
           <span class="label-text">Continue with Google</span>
         </button>
-        <p class="note">No credit card required</p>
-      </div>
       <p class="alt">Don't have an account? <a href="#" id="start-selling">Start selling</a></p>
       <p class="legal">By continuing you agree to our <a href="#">terms of service</a> and <a href="#">privacy policy</a>.</p>
-    </section>
-  </div>
+    </div>
+  </section>
 </main>
 
 <!-- ============ ONBOARDING ============ -->
@@ -136,6 +129,6 @@
 
 <div class="toast" id="toast" role="status" hidden></div>
 <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-<script src="app.js?v=12"></script>
+<script src="app.js?v=15"></script>
 </body>
 </html>
