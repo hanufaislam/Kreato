@@ -136,15 +136,12 @@ a:hover { text-decoration: underline; }
 .signin-right { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; }
 .signin-glow { position: absolute; top: -280px; right: -120px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(85,73,182,.10), rgba(85,73,182,0)); pointer-events: none; }
 .signin-box { position: relative; width: 100%; max-width: 384px; margin: 0 auto; }
-.signin-mlogo { display: none; color: var(--primary); margin-bottom: 40px; }
 .signin-box h1 { font-size: 28px; line-height: 1.2; font-weight: 600; letter-spacing: -.02em; margin-bottom: 28px; }
 .btn-google { height: 52px; border-radius: 999px; background: #fff; color: var(--foreground); border: 1.5px solid var(--input); font-size: 16px; font-weight: 500; }
 .btn-google:hover:not(:disabled) { background: var(--muted); border-color: #c4c8d2; }
-.alt { margin-top: 20px; font-size: 15px; color: var(--muted-foreground); }
-.alt a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-.legal { margin-top: 32px; font-size: 13px; color: var(--muted-foreground); line-height: 1.6; }
+.legal { margin-top: 24px; font-size: 13px; color: var(--muted-foreground); line-height: 1.6; }
 .legal a { color: var(--muted-foreground); text-decoration: underline; text-underline-offset: 3px; }
-.legal a:hover, .alt a:hover { color: var(--primary-hover); }
+.legal a:hover { color: var(--primary-hover); }
 
 /* ---------- Onboarding shell ---------- */
 .ob { display: flex; flex-direction: column; align-items: center; padding: 20px 16px 56px; }
@@ -249,11 +246,13 @@ a:hover { text-decoration: underline; }
 }
 
 /* ---------- Responsive ---------- */
+/* phones: full purple screen, lines from the top to mid-right, sign-in as a white sheet at the bottom */
 @media (max-width: 767px) {
-  .signin { grid-template-columns: 1fr; }
-  .signin-left { display: none; }
-  .signin-right { justify-content: flex-start; padding: 28px 16px 40px; }
-  .signin-mlogo { display: block; }
+  .signin { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100vh; min-height: 100dvh; background: var(--brand-panel); }
+  .signin-left { position: absolute; inset: 0; padding: 28px 16px; }
+  .signin-pitch, .signin-fade, .signin-glow { display: none; }
+  .signin-right { flex: none; z-index: 1; background: #fff; border-radius: 24px 24px 0 0; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 32px rgba(20, 12, 70, .18); }
+  .signin-box h1 { font-size: 24px; margin-bottom: 20px; }
 }
 @media (max-width: 520px) {
   .ob-body { padding: 20px; }

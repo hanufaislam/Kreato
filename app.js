@@ -42,15 +42,18 @@ function startSigninPaths() {
 
   const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
   host.append(canvas);
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches, phoneMq = matchMedia('(max-width: 767px)');
   let w = 0, h = 0, t0 = performance.now();
   const lerp = (a, b, k) => a + (b - a) * k;
   function draw(now) {
     const dpr = window.devicePixelRatio || 1, cw = host.clientWidth, ch = host.clientHeight;
     if (!cw || !ch) return; // panel hidden (phone width)
     if (cw !== w || ch !== h) { w = cw; h = ch; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
-    // viewBox 0 0 696 316, fitted to the width and anchored to the top
-    const s = Math.min(w / 696, h / 316), ox = (w - 696 * s) / 2;
+    // viewBox 0 0 696 316, fitted to the width and anchored to the top.
+    // Phones: scale so the curves end at the middle of the right edge, above the sign-in sheet.
+    const phone = phoneMq.matches;
+    const s = phone ? Math.max(w / 696, (h * 0.5) / 780) : Math.min(w / 696, h / 316);
+    const ox = phone ? w - 696 * s : (w - 696 * s) / 2;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
     ctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * ox, 0);
     ctx.strokeStyle = '#fff';
@@ -82,7 +85,6 @@ async function signIn() {
   goStep();
 }
 $('#google-btn').addEventListener('click', signIn);
-$('#start-selling').addEventListener('click', (e) => { e.preventDefault(); signIn(); });
 
 /* ---- Onboarding: single step (store name + link) ---- */
 function goStep() {
